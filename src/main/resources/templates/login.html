@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" th:href="@{/style.css}">
+		<title>Fazer login</title>
+	</head>
+	<body>
+	<main>
+		<h1>Fazer login</h1>
+
+		<a href="/">Voltar ao menu inicial</a>
+		
+		<form th:method="POST" th:action="@{/login}" th:object="${loginFormPayload}">
+			<br />
+			<div>
+		    	<label>Usuário</label><br />
+			    <input type="text" name="username" th:field="*{username}">
+			</div>
+			<br />
+			<div>
+				<label>Senha</label><br />
+				<input type="password" name="password" th:field="*{password}">
+			</div>
+			<br />
+			
+			<button type="submit">Login</button>
+			
+			<br /><br />
+			
+			<span th:if="${erroLogin != null}" th:text="${erroLogin}" style="color: red" />
+		</form>
+
+		</main>
+	</body>
+</html>
+
+

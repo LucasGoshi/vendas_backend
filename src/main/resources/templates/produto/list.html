@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Lista de produtos</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body x-page="produto">
+	<nav th:replace="fragments/navmenu"></nav>
+	<main>
+		<h6>Produtos</h6>
+		<h3>Lista de produtos</h3>
+		<a th:href="@{/produto/novo}" th:if="${session.currentUser != null && session.currentUser.isAdministrador()}">+ Novo</a><br /><br />
+	
+	    <div>
+	      <table id="dataTable" width="100%" cellspacing="0">
+	        <thead>
+	          <tr>
+	            <th>Nome do produto</th>
+	            <th>Descrição</th>
+				<th>Preço de compra</th>
+				<th>Preço de venda</th>
+				<th>Grupo</th>
+				<th>Fabricante</th>
+	            <th>Ações</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <tr th:each="produto : ${produtos}">
+	            <td th:text="${produto.nome}" />
+	            <td th:text="${produto.descricao}" />
+				<td th:text="${produto.precoCompra}" />
+				<td th:text="${produto.precoVenda}" />
+				<td th:text="${produto.grupo?.nome}" />
+				<td th:text="${produto.fabricante?.nomeFantasia}" />
+	            <td th:if="${session.currentUser != null && session.currentUser.isAdministrador()}">
+	              <a
+	                th:href="@{'/produto/atualizar/'+${produto.id}}"
+	                style="color: blue"
+	                class="nav-link"
+	                >Alterar</a
+	              >
+				  <span> | </span>
+	              <a
+	                th:href="@{'/produto/remover/'+${produto.id}}"
+	                style="color: red"
+	                class="nav-link"
+	                >Excluir</a
+	              >
+	            </td>
+				<td th:if="${session.currentUser != null && !session.currentUser.isAdministrador()}">
+				  <span style="text-decoration: underline" title="Disponível apenas para administradores">Indisponível</span>
+				</td>
+	          </tr>
+	        </tbody>
+	      </table>
+	  </div>
+  </main>
+  </body>
+</html>

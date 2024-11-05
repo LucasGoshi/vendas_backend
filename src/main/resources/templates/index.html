@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Sistema de Vendas de Produtos Naturais</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body x-page="home">
+	<nav th:replace="fragments/navmenu"></nav>
+	<main>
+		<h1>Home</h1>
+		<div th:if="${session.currentUser != null}">
+			<p>
+				Usuário atual: <span th:text="${session.currentUser.getUsuario()}"></span><br />
+				E-mail: <span th:text="${session.currentUser.getEmail()}"></span><br />
+				Acesso: <span th:if="${session.currentUser.isAdministrador()}">Administrador</span><span th:if="${!session.currentUser.isAdministrador()}">Vendedor</span>
+			</p>
+		</div>
+	</main>
+</body>
+</html>

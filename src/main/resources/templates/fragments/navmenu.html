@@ -1,0 +1,19 @@
+<nav>
+	<ul>
+		<li><a th:href="@{/}" class="home">Home</a></li>
+		<li th:if="${session.currentUser != null}"><a th:href="@{/produto/}" class="produto">Produto</a></li>
+		<li th:if="${session.currentUser != null && session.currentUser.isAdministrador()}"><a th:href="@{/fabricante/fabricanteIndex}" class="fabricante">Fabricante</a></li>
+		<li th:if="${session.currentUser != null && session.currentUser.isAdministrador()}"><a th:href="@{/grupo/}" class="grupo">Grupo</a></li>
+		<li th:if="${session.currentUser != null}"><a th:href="@{/venda/}" class="venda">Vendas</a></li>
+		<li th:if="${session.currentUser == null}">
+			<form th:action="@{/login}" method="GET">
+				<button type="submit">Login</button>
+			</form>
+		</li>
+		<li th:if="${session.currentUser != null}">
+			<form th:action="@{/logout}" method="POST">
+				<button type="submit">Logout</button>
+			</form>
+		</li>
+	</ul>
+</nav>
