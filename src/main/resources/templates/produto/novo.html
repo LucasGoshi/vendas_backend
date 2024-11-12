@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Criar novo produto</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body>
+	<main>
+	  <div>
+		<h6>Produtos</h6>
+	    <h3>Criar novo produto</h3>
+	    <a th:href="@{/produto/}">Voltar à lista de produtos</a>
+	  </div>
+	  <div>
+		<form
+		    th:action="@{/produto/novo}"
+		    th:object="${produto}"
+		    th:method="POST"
+		  >
+		  	<br />
+		    <div>
+		      <label for="nome">Nome do produto</label><br />
+		      <input
+		        type="text"
+		        id="nome"
+		        name="nome"
+		        th:field="*{nome}"
+		        placeholder="Qual o nome do produto?"
+		      />
+		    </div>
+			<br />
+			<div>
+			  <label for="descricao">Descrição do produto</label><br />
+			  <input
+			    type="text"
+			    id="descricao"
+			    name="descricao"
+			    th:field="*{descricao}"
+			    placeholder="Qual a descrição do produto?"
+			  />
+			</div>
+			<br />
+			<div>
+			  <label for="descricao">Preço de compra</label><br />
+			  <input
+			    type="number"
+				min="0"
+				step="0.5"
+			    id="precoCompra"
+			    name="precoCompra"
+			    th:field="*{precoCompra}"
+			    placeholder="5.00"
+			  />
+			</div>
+			<br />
+			<div>
+			  <label for="descricao">Preço de venda</label><br />
+			  <input
+			    type="number"
+				min="0"
+				step="0.5"
+			    id="precoVenda"
+			    name="precoVenda"
+			    th:field="*{precoVenda}"
+			    placeholder="10.00"
+			  />
+			</div>
+			<br />
+			<div>
+			  <label for="descricao">Grupo</label><br />
+			  <select th:field="*{grupo}">
+				  <option th:each="grupo : ${grupos}" th:text="${grupo.nome}" th:value="${grupo.id}" />
+			  </select>
+			</div>
+			<br />
+			<div>
+			  <label for="descricao">Fabricante</label><br />
+			  <select th:field="*{fabricante}">
+				  <option th:each="fabricante : ${fabricantes}" th:text="${fabricante.nomeFantasia}" th:value="${fabricante.id}" />
+			  </select>
+			</div>
+			<br />
+		    <button type="submit" class="btn btn-primary">Criar produto</button>
+		</form>
+	  </div>
+	  </main>
+  </body>
+</html>

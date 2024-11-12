@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Lista de grupos</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body x-page="grupo">
+	<nav th:replace="fragments/navmenu"></nav>
+	<main>
+		<h6>Grupos</h6>
+		<h3>Lista de grupos</h3>
+		<a th:href="@{/grupo/novo}">+ Novo</a><br /><br />
+
+		  <div>
+		    <table id="dataTable" width="100%" cellspacing="0">
+		      <thead>
+		        <tr>
+		          <th>Nome do grupo</th>
+		          <th>Descrição</th>
+				<th>Grupo parente</th>
+		          <th>Ações</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr th:each="grupo : ${grupos}">
+		          <td th:text="${grupo.nome}" />
+		          <td th:text="${grupo.descricao}" />
+				  <td th:if="${grupo.getGrupoParente() != null}" th:text="${grupo.getGrupoParente().nome + ' - ID ' + grupo.getGrupoParente().id}" />
+				  <td th:if="${grupo.getGrupoParente() == null}">[nenhum grupo]</td>
+		          <td>
+		            <a
+		              th:href="@{'/grupo/atualizar/'+${grupo.id}}"
+		              style="color: blue"
+		              class="nav-link"
+		              >Alterar</a
+		            >
+				  <span> | </span>
+		            <a
+		              th:href="@{'/grupo/remover/'+${grupo.id}}"
+		              style="color: red"
+		              class="nav-link"
+		              >Excluir</a
+		            >
+		          </td>
+		        </tr>
+		      </tbody>
+		    </table>
+		</div>
+	</main>
+  </body>
+</html>
