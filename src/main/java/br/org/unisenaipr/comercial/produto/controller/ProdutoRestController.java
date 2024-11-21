@@ -10,6 +10,7 @@ import br.org.unisenaipr.comercial.produto.service.ProdutoService;
 
 @RestController
 @RequestMapping("/api/produto")
+@CrossOrigin(origins = "*") 
 public class ProdutoRestController {
     @Autowired
     ProdutoService produtoService;

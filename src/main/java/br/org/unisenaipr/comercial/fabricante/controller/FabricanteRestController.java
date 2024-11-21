@@ -10,6 +10,7 @@ import br.org.unisenaipr.comercial.fabricante.service.FabricanteService;
 
 @RestController
 @RequestMapping("/api/fabricante")
+@CrossOrigin(origins = "*") 
 public class FabricanteRestController {
     @Autowired
     FabricanteService fabricanteService;

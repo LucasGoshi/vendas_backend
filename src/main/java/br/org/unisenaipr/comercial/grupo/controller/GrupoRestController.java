@@ -10,6 +10,7 @@ import br.org.unisenaipr.comercial.grupo.service.GrupoService;
 
 @RestController
 @RequestMapping("/api/grupo")
+@CrossOrigin(origins = "*") 
 public class GrupoRestController {
     @Autowired
     GrupoService grupoService;

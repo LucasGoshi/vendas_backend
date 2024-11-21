@@ -12,6 +12,7 @@ import br.org.unisenaipr.comercial.venda.service.VendaService;
 
 @RestController
 @RequestMapping("/api/venda")
+@CrossOrigin(origins = "*") 
 public class VendaRestController {
     @Autowired
     VendaService vendaService;
