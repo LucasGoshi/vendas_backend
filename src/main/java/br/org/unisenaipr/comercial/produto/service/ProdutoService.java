@@ -30,23 +30,35 @@ public class ProdutoService {
     }
 
     public Produto saveProduto(Produto produto) {
-        // Validação do ID Fabricante
+        // Verifica e associa o objeto Fabricante
         if (produto.getFabricante() != null) {
             Optional<Fabricante> fabricante = fabricanteRepository.findById(produto.getFabricante().getId());
-            produto.setFabricante(fabricante.orElseThrow(() -> new RuntimeException("Fabricante não encontrado")));
+            if (fabricante.isPresent()) {
+                produto.setFabricante(fabricante.get());
+            } else {
+                throw new RuntimeException("Fabricante não encontrado com o ID: " + produto.getFabricante().getId());
+            }
+        } else {
+            throw new RuntimeException("O objeto Fabricante é obrigatório.");
         }
 
-        // Validação do ID Grupo
+        // Verifica e associa o objeto Grupo
         if (produto.getGrupo() != null) {
             Optional<Grupo> grupo = grupoRepository.findById(produto.getGrupo().getId());
-            produto.setGrupo(grupo.orElseThrow(() -> new RuntimeException("Grupo não encontrado")));
+            if (grupo.isPresent()) {
+                produto.setGrupo(grupo.get());
+            } else {
+                throw new RuntimeException("Grupo não encontrado com o ID: " + produto.getGrupo().getId());
+            }
+        } else {
+            throw new RuntimeException("O objeto Grupo é obrigatório.");
         }
 
         return produtoRepository.save(produto);
     }
 
     public Produto updateProduto(Produto produto) {
-        return saveProduto(produto); 
+        return saveProduto(produto);
     }
 
     public void deleteProduto(Produto produto) {
@@ -59,6 +71,6 @@ public class ProdutoService {
 
     public Produto findId(long id) {
         Optional<Produto> obj = produtoRepository.findById(id);
-        return obj.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        return obj.orElseThrow(() -> new RuntimeException("Produto não encontrado com o ID: " + id));
     }
 }
