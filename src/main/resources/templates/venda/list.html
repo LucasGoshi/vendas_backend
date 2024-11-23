@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Lista de vendas</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body x-page="venda">
+	<nav th:replace="fragments/navmenu"></nav>
+	<main>
+		<h6>Vendas</h6>
+		<h3>Lista de vendas</h3>
+		<a th:href="@{/venda/novo}">+ Nova venda</a><br /><br />
+
+		<div>
+		  <table id="dataTable" width="100%" cellspacing="0">
+		    <thead>
+		      <tr>
+		        <th>Produto</th>
+		        <th>Quantidade</th>
+				<th>Data de venda</th>
+		        <th>Ações</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      <tr th:each="venda : ${vendas}">
+				<td th:text="${venda.produto?.nome}" />
+		        <td th:text="${venda.quantidade}" />
+				<td th:text="${venda.dateTime}" />
+		        <td>
+		          <a
+		            th:href="@{'/venda/atualizar/'+${venda.id}}"
+		            style="color: blue"
+		            class="nav-link"
+		            >Alterar</a
+		          >
+				  <span> | </span>
+		          <a
+		            th:href="@{'/venda/remover/'+${venda.id}}"
+		            style="color: red"
+		            class="nav-link"
+		            >Excluir</a
+		          >
+		        </td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</div>
+	</main>
+  </body>
+</html>

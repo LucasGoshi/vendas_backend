@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Lista de subgrupos</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body>
+	<nav th:replace="fragments/navmenu"></nav>
+	<h6>Subgrupos</h6>
+	<h3>Lista de subgrupos</h3>
+	<a th:href="@{/subgrupo/novo}">+ Novo</a><br /><br />
+	
+    <div>
+      <table id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Nome do subgrupo</th>
+            <th>Descrição</th>
+			<th>Grupo parente</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="subgrupo : ${subgrupos}">
+            <td th:text="${subgrupo.nome}" />
+            <td th:text="${subgrupo.descricao}" />
+			<td th:text="${subgrupo.grupoParente?.nome}" />
+            <td>
+              <a
+                th:href="@{'/subgrupo/atualizar/'+${subgrupo.id}}"
+                style="color: blue"
+                class="nav-link"
+                >Alterar</a
+              >
+			  <span> | </span>
+              <a
+                th:href="@{'/subgrupo/remover/'+${subgrupo.id}}"
+                style="color: red"
+                class="nav-link"
+                >Excluir</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  </body>
+</html>
