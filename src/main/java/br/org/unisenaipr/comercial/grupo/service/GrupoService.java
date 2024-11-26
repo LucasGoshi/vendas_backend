@@ -21,7 +21,15 @@ public class GrupoService {
 	}
 
 	public Grupo saveGrupo(Grupo grupo) {
-		return grupoRepository.save(grupo);
+	    if (grupo.getGrupoParente() != null && grupo.getGrupoParente().getId() != null) {
+	        // Busca o grupo parente no banco para garantir que ele esteja anexado ao contexto do Hibernate
+	        Grupo grupoParente = grupoRepository.findById(grupo.getGrupoParente().getId())
+	            .orElseThrow(() -> new RuntimeException("Grupo parente não encontrado"));
+	        
+	        // Associa o grupo parente persistido ao novo grupo
+	        grupo.setGrupoParente(grupoParente);
+	    }
+	    return grupoRepository.save(grupo);
 	}
 
 	public Grupo updateGrupo(Grupo grupo) {
