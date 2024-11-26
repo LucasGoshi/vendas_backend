@@ -27,7 +27,7 @@ public class Fabricante implements Serializable {
 	@Column(name = "fabricante_razaosocial", nullable = false, length = 200)
 	private String razaoSocial;
 	
-	@Column(name = "fabricante_cnpj", nullable = false, length = 15, unique = true)
+	@Column(name = "fabricante_cnpj", nullable = false, length = 300, unique = true)
 	private String cnpj;
 	
 	@Column(name = "fabricante_endereco", nullable = false, length = 150)
