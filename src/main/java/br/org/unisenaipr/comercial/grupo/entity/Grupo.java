@@ -39,9 +39,10 @@ public class Grupo implements Serializable {
 	@Column(name = "descricao", nullable = false, length = 200)
 	private String descricao;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "grupo_parente_id", referencedColumnName = "id", nullable = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonBackReference
 	private Grupo grupoParente;
     
 	public Grupo() {
