@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Atualizar venda</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body>
+  <main>	
+	  <div>
+		<h6>Vendas</h6>
+	    <h3>Atualizar venda</h3>
+	    <a th:href="@{/venda/}">Voltar à lista de vendas</a>
+	  </div>
+		<form
+		    th:action="@{/venda/novo}"
+		    th:object="${venda}"
+		    th:method="POST"
+		  >
+			<!-- necessário para atualizar essa row, e não criar uma nova -->
+			<input type="hidden" th:field="*{id}">
+			
+		  	<br />
+			<div>
+			  <label for="produto">Produto</label><br />
+			  <select id="produto" th:field="*{produto}">
+				  <option th:each="produto : ${produtos}" th:text="${produto.nome}" th:value="${produto.id}" />
+			  </select>
+			</div>
+			<br />
+		    <div>
+		      <label for="quantidade">Quantidade de itens</label><br />
+		      <input
+		        type="number"
+				min="0"
+				max="250"
+				step="1"
+		        id="quantidade"
+		        name="quantidade"
+		        th:field="*{quantidade}"
+		        placeholder="Quantos itens na venda?"
+		      />
+		    </div>
+			<br />
+		    <button type="submit" class="btn btn-primary">Atualizar venda</button>
+		</form>
+	  </main>
+  </body>
+</html>

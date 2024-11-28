@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Fabricante</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body x-page="fabricante">
+    <nav th:replace="fragments/navmenu"></nav>
+    <main>
+	  <h6>Fabricantes</h6>
+      <h3>Lista de fabricantes</h3>
+      <a th:href="@{/fabricante/fabricanteSave}">+ Novo</a>
+	  <br /><br />
+      <div>
+        <div>
+          <table id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Nome Fantasia</th>
+                <th>Razão Social</th>
+                <th>CNPJ</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th>Vendedor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="fab : ${fabricante}">
+                <td th:text="${fab.nomeFantasia}" />
+                <td th:text="${fab.razaoSocial}" />
+                <td th:text="${fab.cnpj}" />
+                <td th:text="${fab.endereco}" />
+                <td th:text="${fab.telefone}" />
+                <td th:text="${fab.email}" />
+                <td th:text="${fab.vendedor}" />
+                <td>
+                  <a
+                    href=""
+                    th:href="@{'/fabricante/fabricanteUpdate/'+${fab.id}}"
+                    style="color: blue"
+                    class="nav-link"
+                    >Alterar</a
+                  >
+				  <span> | </span>
+                  <a
+                    href=""
+                    th:href="@{'/fabricante/deletar-fabricante/'+${fab.id}}"
+                    style="color: red"
+                    class="nav-link"
+                    >Excluir</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

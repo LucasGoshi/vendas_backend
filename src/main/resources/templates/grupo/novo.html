@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Criar novo grupo</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body>
+
+	<main>
+	  <div>
+		<h6>Grupos</h6>
+	    <h3>Criar novo grupo</h3>
+	    <a th:href="@{/grupo/}">Voltar à lista de grupos</a>
+	  </div>
+	  <div>
+		<form
+		    th:action="@{/grupo/novo}"
+		    th:object="${grupo}"
+		    th:method="POST"
+		  >
+		  	<br />
+		    <div>
+		      <label for="nome">Nome do grupo</label><br />
+		      <input
+		        type="text"
+		        id="nome"
+		        name="nome"
+		        th:field="*{nome}"
+		        placeholder="Qual o nome do grupo?"
+		      />
+		    </div>
+			<br />
+			<div>
+			  <label for="descricao">Descrição do grupo</label><br />
+			  <input
+			    type="text"
+			    id="descricao"
+			    name="descricao"
+			    th:field="*{descricao}"
+			    placeholder="Qual a descrição do grupo?"
+			  />
+			</div>
+			<br />
+			<div>
+			  <label for="descricao">Grupo parente</label><br />
+			  <select th:field="*{grupoParente}">
+				  <option th:value="${-100}">[nenhum grupo]</option>
+				  <option th:each="grupo : ${grupos}" th:text="${grupo.nome + ' - ID ' + grupo.id}" th:value="${grupo.id}" />
+			  </select>
+			</div>
+			<br />
+		    <button type="submit" class="btn btn-primary">Criar grupo</button>
+		</form>
+	  </div>
+
+	  </main>
+  </body>
+</html>

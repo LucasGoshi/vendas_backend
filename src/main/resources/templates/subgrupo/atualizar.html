@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <title>Atualizar subgrupo</title>
+	<link rel="stylesheet" th:href="@{/style.css}">
+  </head>
+  <body>
+	  <div>
+		<h6>Subgrupos</h6>
+	    <h3>Atualizar subgrupo <span th:text="${subgrupo.nome}"></span></h3>
+	    <a th:href="@{/subgrupo/}">Voltar à lista de subgrupos</a>
+	  </div>
+	  <div>
+		<form
+		    th:action="@{/subgrupo/novo}"
+		    th:object="${subgrupo}"
+		    th:method="POST"
+		  >
+		  	<!-- necessário para atualizar essa row, e não criar uma nova -->
+		  	<input type="hidden" th:field="*{id}">
+			
+		  	<br />
+		    <div>
+		      <label for="nome">Nome do subgrupo</label><br />
+		      <input
+		        type="text"
+		        id="nome"
+		        name="nome"
+		        th:field="*{nome}"
+		        placeholder="Qual o nome do subgrupo?"
+		      />
+		    </div>
+			<br />
+			<div>
+			  <label for="descricao">Descrição do subgrupo</label><br />
+			  <input
+			    type="text"
+			    id="descricao"
+			    name="descricao"
+			    th:field="*{descricao}"
+			    placeholder="Qual a descrição do subgrupo?"
+			  />
+			</div>
+			<br />
+			<div>
+			  <label for="descricao">Grupo parente</label><br />
+			  <select th:field="*{grupoParente}">
+				  <option th:each="grupo : ${grupos}" th:text="${grupo.nome}" th:value="${grupo.id}" />
+			  </select>
+			</div>
+			<br />
+		    <button type="submit" class="btn btn-primary">Atualizar subgrupo</button>
+		</form>
+	  </div>
+  </body>
+</html>
